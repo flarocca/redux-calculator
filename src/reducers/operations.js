@@ -59,8 +59,6 @@ const operation = (state = {}, action) => {
         showResult: false,
         mustReset: true
       });
-      break;
-
 
     default:
       return state
