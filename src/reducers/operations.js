@@ -2,73 +2,61 @@ const initialState = {
   value: "0",
   result: 0,
   history: "",
-  lastOperator: null
-}
-
-const getResult = (x, y, op) => {
-  return op(x, y);
+  lastOperator: null,
+  operation: () => { return 0 },
+  showResult: false,
+  mustReset: false
 }
 
 const operation = (state = {}, action) => {
   let history = null;
-  let result = 0;
+  let op = null;
+  let lastOperator = action.lastOperator;
 
   if (!state.value)
     return state;
   if (state.lastOperator)
     return state;
-  if (!state.result)
-    return Object.assign({}, state, {
-      result: parseInt(state.value, 10),
-      lastOperator: action.operator,
-      value: "",
-      history: state.history + state.value
-    });
-
 
   switch (action.operator) {
     case '+':
-      result = getResult(parseInt((state.result || 0), 10), parseInt(state.value, 10), (val1, val2) => { return val1 + val2 });
-      history = state.history + " + " + state.value;
+      op = () => { return parseInt((state.result || 0), 10) + parseInt(state.value, 10) };
+      history = state.value + "+";
       break;
 
     case '-':
-      result = getResult(parseInt((state.result || 0), 10), parseInt(state.value, 10), (val1, val2) => { return val1 - val2 });
-      history = state.history + " - " + state.value;
+      op = () => { return parseInt((state.result || 0), 10) - parseInt(state.value, 10) };
+      history = state.value + "-";
       break;
 
     case 'x':
-      result = getResult(parseInt((state.result || 0), 10), parseInt(state.value, 10), (val1, val2) => { return val1 * val2 });
-      history = state.history + " * " + state.value;
+      op = () => { return parseInt((state.result || 0), 10) * parseInt(state.value, 10) };
+      history = state.value + "*";
       break;
 
     case '/':
       if (!this.state.operand || this.state.result === 0)
         return state;
-
-      result = getResult(parseInt((state.result || 0), 10), parseInt(state.value, 10), (val1, val2) => { return val1 / val2 });
-      history = state.history + " / " + state.value;
+      op = () => { return parseInt((state.result || 0), 10) / parseInt(state.value, 10) };
+      history = state.value + "=";
       break;
 
     case '=':
-      return Object.assign({}, state, {
-        result: getResult(parseInt((state.result || 0), 10), parseInt(state.value, 10), (val1, val2) => { return val1 / val2 }),
-        lastOperator: action.operator,
-        value: result.toString(),
-        history: history,
-        showResult: false,
-        mustReset: true
-      });
+      op = () => { return parseInt((state.result || 0), 10) };
+      history = state.value;
+      lastOperator = null;
+      break;
 
     default:
       return state
   }
 
   return Object.assign({}, state, {
-    result: result,
-    lastOperator: action.operator,
-    value: result.toString(),
-    history: history,
+    operation: op,
+    result: state.operation(state.result, state.value),
+    lastOperator: lastOperator,
+    value: state.operation(state.result, state.value).toString(),
+    history: state.history + history,
     showResult: true
   });
 }
