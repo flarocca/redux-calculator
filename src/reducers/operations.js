@@ -6,7 +6,6 @@ const initialState = {
   value: "0",
   result: 0,
   history: [],
-  lastOperator: null,
   operation: (val1, val2) => { return val2 },
   showResult: false,
   mustReset: false,

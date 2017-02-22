@@ -22,7 +22,7 @@ class Calculator extends Component {
           <div className="button" style={{ backgroundColor: 'rgb(100, 100, 100)' }}></div>
           <div className="button" style={{ backgroundColor: 'rgb(100, 100, 100)' }}></div>
           <div className="button" style={{ backgroundColor: 'rgb(100, 100, 100)' }}></div>
-          <Button value={"CLR"} style={{ backgroundColor: 'rgb(51, 204, 0)', fontSize: '2vw' }} onClick={this._addFunction} />
+          <Button value={"CLEAR"} text={'CLR'} style={{ backgroundColor: 'rgb(51, 204, 0)', fontSize: '20px' }} onClick={this._addFunction} />
         </div>
         <div className="container row">
           <Button value={7} style={{ backgroundColor: 'rgb(100, 100, 100)' }} onClick={this._addOperand} />

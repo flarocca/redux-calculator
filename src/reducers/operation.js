@@ -1,59 +1,32 @@
+import getMathOperation from './getMathOperation';
+
 const operation = (state = {}, initialState, action) => {
-  let op = null;
-
-  switch (action.operator) {
-    case '+':
-      op = (val1, val2) => { return parseInt(val1, 10) + parseInt(val2, 10) };
-      break;
-
-    case '-':
-      op = (val1, val2) => { return parseInt(val1, 10) - parseInt(val2, 10) };
-      break;
-
-    case 'x':
-      op = (val1, val2) => { return parseInt(val1, 10) * parseInt(val2, 10) };
-      break;
-
-    case '/':
-      op = (val1, val2) => { return parseInt(val1, 10) / parseInt(val2, 10) };
-      break;
-
-    case '=':
-      return Object.assign({}, initialState, {
-        value: state.operation(state.result, state.value),
-        showResult: true
-      });
-
-    default:
-      return state
-  }
-
-  if (state.lastInput === 'OP') {
-    let newHistory = state.history;
-    newHistory[newHistory.length - 1] = action.operator;
-
-    return Object.assign({}, state, {
-      operation: op,
-      result: state.result,
-      lastOperator: action.operator,
-      value: state.value,
-      history: newHistory,
-      showResult: true,
-      lastInput: 'OP'
+  if (action.operator === '=')
+    return Object.assign({}, initialState, {
+      value: state.operation(state.result, state.value),
+      showResult: true
     });
-  }
 
+  let op = getMathOperation(action.operator);
+  let result = state.operation(state.result, state.value);
+  let value = result.toString();
   let history = [
     ...state.history,
     state.value,
     action.operator
   ];
 
+  if (state.lastInput === 'OP') {
+    history = state.history;
+    history[history.length - 1] = action.operator;
+    result = state.result;
+    value = state.value;
+  }
+
   return Object.assign({}, state, {
     operation: op,
-    result: state.operation(state.result, state.value),
-    lastOperator: action.operator,
-    value: state.operation(state.result, state.value).toString(),
+    result: result,
+    value: value,
     history: history,
     showResult: true,
     lastInput: 'OP'

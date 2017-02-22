@@ -7,7 +7,7 @@ const operand = (state = {}, action) => {
     });
   } else {
     return Object.assign({}, state, {
-      value: parseInt((state.value || "0").toString() + action.operand.toString(), 10).toString(),
+      value: parseFloat((state.value || "0").toString() + action.operand.toString(), 10).toString(),
       lastInput: 'NU'
     });
   }
