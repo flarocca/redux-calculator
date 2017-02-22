@@ -12,7 +12,7 @@ export const addOperand = (operand) => {
   }
 }
 
-export const addFunction= (func) => {
+export const addFunction = (func) => {
   return {
     type: 'ADD_FUNCTION',
     func

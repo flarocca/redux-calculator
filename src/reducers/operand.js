@@ -4,13 +4,18 @@ const operand = (state = {}, action) => {
       value: action.operand.toString(),
       showResult: false,
       lastInput: 'NU'
-    });
+    })
   } else {
+    let value = (state.value || '0') + action.operand
+    if (state.value === '0' && action.operand === '0') {
+      value = '0'
+    }
+
     return Object.assign({}, state, {
-      value: parseFloat((state.value || "0").toString() + action.operand.toString(), 10).toString(),
+      value: value,
       lastInput: 'NU'
-    });
+    })
   }
 }
 
-export default operand;
+export default operand

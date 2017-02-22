@@ -1,9 +1,9 @@
-import func from './func';
-import operand from './operand';
-import operation from './operation';
+import func from './func'
+import operand from './operand'
+import operation from './operation'
 
 const initialState = {
-  value: "0",
+  value: '0',
   result: 0,
   history: [],
   operation: (val1, val2) => { return val2 },
@@ -15,14 +15,14 @@ const initialState = {
 const operations = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_OPERATOR':
-      return operation(state, initialState, action);
+      return operation(state, initialState, action)
     case 'ADD_FUNCTION':
-      return func(state, initialState, action);
+      return func(state, initialState, action)
     case 'ADD_OPERAND':
-      return operand(state, action);
+      return operand(state, action)
     default:
-      return state;
+      return state
   }
 }
 
-export default operations;
+export default operations

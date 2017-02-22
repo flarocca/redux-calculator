@@ -1,10 +1,10 @@
 const func = (state = {}, initialState, action) => {
   switch (action.func) {
     case 'CLEAR':
-      return initialState;
+      return initialState
     default:
-      return state;
+      return state
   }
 }
 
-export default func;
+export default func
