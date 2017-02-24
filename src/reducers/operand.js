@@ -7,8 +7,14 @@ const operand = (state = {}, action) => {
     })
   } else {
     let value = (state.value || '0') + action.operand
-    if (state.value === '0' && action.operand === '0') {
-      value = '0'
+    if (state.value === '0') {
+      if (action.operand === '.') {
+        value = '0.'
+      } else if (action.operand === '0') {
+        value = '0'
+      } else {
+        value = action.operand
+      }
     }
 
     return Object.assign({}, state, {
