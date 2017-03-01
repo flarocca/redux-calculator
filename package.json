@@ -2,6 +2,7 @@
   "name": "redux-calculator",
   "version": "1.0.0",
   "private": true,
+  "homepage": "http://www.facundolarocca.com/examples/redux-calculator",
   "devDependencies": {
     "react-scripts": "0.9.0"
   },
