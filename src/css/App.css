@@ -41,7 +41,6 @@
 
 #Calculator{
   display: inline-block;
-  width: 260px;
   background-color: rgb(65, 65, 65);
   border: 1px solid rgb(100, 100, 100);
   border-radius: 5px;
@@ -72,6 +71,14 @@
   width: 100%;
   bottom: 0;
   justify-content: center;
+}
+
+@media all and (max-width: 330px), (max-height:770px) {
+  .footer {
+    position: static;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .logo {
@@ -125,10 +132,12 @@
 
 .header{
   padding-left: 40px;
+  padding-right: 40px;
   margin-left: 40px;
   margin-right: 40px;
   background-color: rgb(65, 65, 65);
   border-radius: 0px 0px 20px 20px;
+  align-self: center;
 }
 
 .repo-link{
@@ -137,4 +146,10 @@
 
 .header-text{
   font-size: large;
+  text-align: justify;
+}
+
+#header{
+  max-width: 900px;
+  min-width: 230px;
 }
